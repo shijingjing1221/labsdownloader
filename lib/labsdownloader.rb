@@ -8,11 +8,11 @@ class LabsDownloader
     base.send_data content, type: "application/text", filename: file_name
   end
 
-  def self.download_zip(zip_files, zip_name = 'file.zip')
+  def self.download_zip(base, zip_files, zip_name = 'file.zip')
     # ^ provides some sane default for zip_name... let user override
 
     # Use TempFile block so we dont have to write ensure .close() code
-    Tempfile.new("tempZipFile-#{Random.rand(10...100000)}-#{Time.now.to_f}") do |temp_file|
+    Tempfile.open("tempZipFile-#{Random.rand(10...100000)}-#{Time.now.to_f}") do |temp_file|
 
       # build the zip
       Zip::OutputStream.open(temp_file.path) do |z|
@@ -24,7 +24,7 @@ class LabsDownloader
       end
 
       # send the zip
-      send_file temp_file.path, :type => 'application/zip',
+      base.send_file temp_file.path, :type => 'application/zip',
                 :disposition => 'attachment',
                 :filename => zip_name
     end
