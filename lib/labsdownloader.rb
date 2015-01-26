@@ -1,12 +1,15 @@
 # coding: utf-8
 class LabsDownloader
-
+  require 'zip'
+  require 'json'
+  
   def self.download_script(base, content, file_name = 'script.sh')
     # ^ provides some sane default for file_name... let user override
 
     # send the front end content down to the end user as a text file
     base.send_data content, type: "application/text", filename: file_name
   end
+
 
   def self.download_zip(base, zip_files, zip_name = 'file.zip')
     # ^ provides some sane default for zip_name... let user override
