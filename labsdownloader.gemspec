@@ -10,4 +10,8 @@ Gem::Specification.new do |s|
   s.files       = ["lib/labsdownloader.rb"]
   s.homepage    = 'http://labs-git.usersys.redhat.com/labsrubygems/labsdownloader/tree/master'
   s.license     = 'MIT'
+
+  # deps
+  s.add_runtime_dependency "rubyzip"
+  s.add_runtime_dependency "json"
 end
